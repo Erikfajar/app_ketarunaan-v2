@@ -1,0 +1,7 @@
+akun admin
+admin1@gmail.com
+catar
+
+akun user 
+user@gmail.com
+12345
