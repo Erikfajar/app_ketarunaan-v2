@@ -16,14 +16,16 @@ class T3pelanggaranController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->search){
-            $pasal = pasal::all();
-            $data = Tingkat_tiga::search($request->search)->get();
-        } else{
+        // if($request->search){
+        //     $pasal = pasal::all();
+        //     $data = Tingkat_tiga::search($request->search)->paginate(10);
+        // } else{
 
-            $pasal = pasal::all();
-            $data = Tingkat_tiga::with('pasal')->where('tipe','pelanggaran')->latest()->get();
-        }
+        //     $pasal = pasal::all();
+        //     $data = Tingkat_tiga::with('pasal')->where('tipe','pelanggaran')->latest()->paginate(10);
+        // }
+        $pasal = pasal::all();
+        $data = Tingkat_tiga::with('pasal')->where('tipe','pelanggaran')->latest()->paginate(10);
      
         return view('pelanggaran.tingkat3.index',compact('data','pasal'));
      
