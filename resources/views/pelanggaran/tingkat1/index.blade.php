@@ -25,19 +25,17 @@ Pelanggaran/Tingkat1
             <div class="card-header">
                
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">+ Data</button>
+                {{-- <a href="{{ route('unduh-word') }}" class="btn btn-primary">Word</a> --}}
                 <div class="col-auto">
-                    <form action="">
-                    <label class="sr-only">Name</label>
                     <form action="" method="GET">
-
                         <input type="search" name="search" id="search" class="form-control mb-2" placeholder="Search....">
                     </form>
-                </form>
+               
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-responsive-sm">
+                    <table class="table table-striped table-hover table-responsive-sm">
                         <thead>
                             <tr>
                                 <th style="color:black; text-align:center">No</th>
@@ -58,12 +56,12 @@ Pelanggaran/Tingkat1
                             <td style="color:black; text-align:center">{{$item->pasal->pasal}}</td>
                             <td style="color:black; text-align:center">{{$item->tgl_indo}}</td>
                             <td style="text-align: center">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal{{ $item->id }}"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#basicModal{{ $item->id }}"><i class="fa-solid fa-user-pen"></i></button>
                                 @include('pelanggaran.tingkat1.modal-edit')
                                 <form method="POST" action="{{ route('Tingkat1-pelanggaran.destroy', $item->id) }}" class="d-inline">
                                     @csrf @method('DELETE')
                                     <button class="btn btn-sm btn-danger delete-btn" type="button">
-                                        <i class="fa-solid fa-trash"></i> Delete
+                                        <i class="fa-solid fa-trash"></i> 
                                     </button>
                                 </form>
                             </td>
@@ -71,7 +69,7 @@ Pelanggaran/Tingkat1
                            </tr>
                         </tbody>
                     </table>
-                    
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

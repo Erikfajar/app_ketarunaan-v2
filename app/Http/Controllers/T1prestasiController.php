@@ -15,12 +15,13 @@ class T1prestasiController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->search){
+        // if($request->search){
             
-            $data = Tingkat_satu::search($request->search)->get();
-        } else{
-            $data = Tingkat_satu::where('tipe','prestasi')->latest()->get();
-        }
+        //     $data = Tingkat_satu::search($request->search)->paginate(10);
+        // } else{
+        //     $data = Tingkat_satu::where('tipe','prestasi')->latest()->paginate(10);
+        // }
+        $data = Tingkat_satu::where('tipe','prestasi')->latest()->paginate(10);
         return view('prestasi.tingkat1.index',compact('data'));
     }
 

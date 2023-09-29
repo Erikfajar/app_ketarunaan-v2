@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('Tingkat1-pelanggaran.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('Tingkat1-pelanggaran.store') }}" method="POST">
                     @csrf
                 <div class="form-group col-md12">
                     <label>Nit Taruna/i</label>

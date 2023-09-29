@@ -15,12 +15,13 @@ class T3prestasiController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->search){
+        // if($request->search){
             
-            $data = Tingkat_tiga::search($request->search)->get();
-        } else{
-            $data = Tingkat_tiga::where('tipe','prestasi')->latest()->get();
-        }
+        //     $data = Tingkat_tiga::search($request->search)->paginate(10);
+        // } else{
+        //     $data = Tingkat_tiga::where('tipe','prestasi')->latest()->paginate(10);
+        // }
+        $data = Tingkat_tiga::where('tipe','prestasi')->latest()->paginate(10);
         return view('prestasi.tingkat3.index',compact('data'));
     }
 

@@ -2,33 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pasal;
-use App\Models\Tingkat_dua;
+use App\Models\Taruna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class T2pelanggaranController extends Controller
+class TarunaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // if($request->search){
-        //     $pasal = pasal::all();
-        //     $data = Tingkat_dua::search($request->search)->paginate(10);
-        // } else{
-
-        //     $pasal = pasal::all();
-        //     $data = Tingkat_dua::with('pasal')->where('tipe','pelanggaran')->latest()->paginate(10);
-        // }
-        $pasal = pasal::all();
-        $data = Tingkat_dua::with('pasal')->where('tipe','pelanggaran')->latest()->paginate(10);
-       
-        return view('pelanggaran.tingkat2.index',compact('data','pasal'));
-      
+        //
     }
 
     /**
@@ -52,47 +39,32 @@ class T2pelanggaranController extends Controller
         Session::flash('nit', $request->nit);
         Session::flash('nama', $request->nama);
         Session::flash('jurusan', $request->jurusan);
-        Session::flash('pasal_id', $request->pasal_id);
-        Session::flash('tgl', $request->tgl);
- 
-    
-        
-      
+        Session::flash('tingkat', $request->tingkat);
 
         $request->validate(
             [
-                'nit' => 'required',
+                'nit' => 'required|unique:taruna',
                 'nama' => 'required',
                 'jurusan' => 'required',
-                'pasal_id' => 'required',
-                'tgl' => 'required',
-                
-           
+                'tingkat' => 'required',
             ],
             [
                 'nit.required' => 'nit wajib diisi',
+                'nit.unique' => 'nit sudah digunakan',
                 'nama.required' => 'nama wajib diisi',
                 'jurusan.required' => 'jurusan wajib diisi',
-                'pasal_id.required' => 'pasal_id wajib diisi',
-                'tgl.required' => 'tanggal wajib diisi',
-               
+                'tingkat.required' => 'Tingkat wajib diisi',
             ]
         );
-  
-        
-
         $data = [
             'nit' => $request->nit,
             'nama' => $request->nama,
             'jurusan' => $request->jurusan,
-            'pasal_id' => $request->pasal_id,
-            'tgl' => $request->tgl,
-            'tipe' =>'pelanggaran',
-        
-            
+            'tingkat' =>$request->tingkat,
         ];
-        Tingkat_dua::create($data);
-        return redirect()->route('Tingkat2-pelanggaran.index')->with('success', 'Berhasil menambahkan data ');
+
+        Taruna::create($data);
+        return back()->with('success','Berhasil menambahkan data');
     }
 
     /**
@@ -129,47 +101,31 @@ class T2pelanggaranController extends Controller
         Session::flash('nit', $request->nit);
         Session::flash('nama', $request->nama);
         Session::flash('jurusan', $request->jurusan);
-        Session::flash('pasal_id', $request->pasal_id);
-        Session::flash('tgl', $request->tgl);
- 
-    
-        
-      
+        Session::flash('tingkat', $request->tingkat);
 
         $request->validate(
             [
                 'nit' => 'required',
                 'nama' => 'required',
                 'jurusan' => 'required',
-                'pasal_id' => 'required',
-                'tgl' => 'required',
-                
-           
+                'tingkat' => 'required',
             ],
             [
                 'nit.required' => 'nit wajib diisi',
                 'nama.required' => 'nama wajib diisi',
                 'jurusan.required' => 'jurusan wajib diisi',
-                'pasal_id.required' => 'pasal_id wajib diisi',
-                'tgl.required' => 'tanggal wajib diisi',
-               
+                'tingkat.required' => 'Tingkat wajib diisi',
             ]
         );
-  
-        
-
         $data = [
             'nit' => $request->nit,
             'nama' => $request->nama,
             'jurusan' => $request->jurusan,
-            'pasal_id' => $request->pasal_id,
-            'tgl' => $request->tgl,
-            'tipe' =>'pelanggaran',
-        
-            
+            'tingkat' =>$request->tingkat,
         ];
-        tingkat_dua::where('id', $id)->where('tipe', 'pelanggaran')->update($data);
-        return redirect()->route('Tingkat2-pelanggaran.index')->with('success', 'Berhasil edit data ');
+
+        Taruna::where('id', $id)->update($data);
+        return back()->with('success','Berhasil Edit data');
     }
 
     /**
@@ -180,7 +136,7 @@ class T2pelanggaranController extends Controller
      */
     public function destroy($id)
     {
-        Tingkat_dua::where('id', $id)->where('tipe', 'pelanggaran')->delete();
-        return redirect()->route('Tingkat2-pelanggaran.index')->with('success', 'Berhasil melakukan delete data');
+        Taruna::where('id', $id)->delete();
+        return back()->with('success','Berhasil hapus data');
     }
 }

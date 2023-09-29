@@ -17,14 +17,16 @@ class T1pelanggaranController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->search){
-            $pasal = pasal::all();
-            $data = Tingkat_satu::search($request->search)->get();
-        } else{
+        // if($request->search){
+        //     $pasal = pasal::all();
+        //     $data = Tingkat_satu::search($request->search)->paginate(10);
+        // } else{
 
-            $pasal = pasal::all();
-            $data = Tingkat_satu::with('pasal')->where('tipe','pelanggaran')->latest()->get();
-        }
+        //     $pasal = pasal::all();
+        //     $data = Tingkat_satu::with('pasal')->where('tipe','pelanggaran')->latest()->paginate(10);
+        // }
+        $pasal = pasal::all();
+        $data = Tingkat_satu::with('pasal')->where('tipe','pelanggaran')->latest()->paginate(10);
         return view('pelanggaran.tingkat1.index',compact('data','pasal'));
     }
 

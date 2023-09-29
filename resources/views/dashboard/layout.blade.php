@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title') </title>
+ 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logo/favicon.ico') }}">
     <link href="{{ asset('Template') }}/vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
@@ -92,7 +93,7 @@
                     </li> 
 
                     <li class="nav-label">CATATAN</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-regular fa-clipboard fa-2xl"></i><span class="nav-text">PELANGGARAN</span></a>
+                    <li><a class="has-arrow" href="javascript:void()"  aria-expanded="false"><i class="fa-regular fa-clipboard fa-2xl"></i><span class="nav-text">PELANGGARAN</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('Tingkat1-pelanggaran.index') }}">TINGKAT I</a></li>
                             <li><a href="{{ route('Tingkat2-pelanggaran.index') }}">TINGKAT II</a></li>
@@ -111,6 +112,14 @@
 
                     
                      <li><a href="{{ route('pasal.index') }}" class="nav-link {{ request()->is('dashboard/pasal') ? 'active' : '' }}"><i class="icon icon-single-04"></i><span class="nav-text">PASAL PELANGGARAN</span></a>
+                    
+                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-regular fa-clipboard fa-2xl"></i><span class="nav-text">TARUNA</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('Taruna-tingkat-satu') }}">TINGKAT I</a></li>
+                            <li><a href="{{ route('Taruna-tingkat-dua') }}">TINGKAT II</a></li>
+                            <li><a href="{{ route('Taruna-tingkat-tiga') }}">TINGKAT III</a></li>
+                        </ul>
+                    </li>
                         {{-- @if(auth()->user()->admin())
                      <li><a href="{{ route('register') }}" class="nav-link {{ request()->is('dashboard/register') ? 'active' : '' }}"><i class="icon icon-single-04"></i><span class="nav-text">REGISTER</span></a>
                         @endif --}}

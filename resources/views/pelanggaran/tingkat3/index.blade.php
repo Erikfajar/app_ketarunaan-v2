@@ -26,15 +26,15 @@ Pelanggaran/Tingkat3
                
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">+ Data</button>
                 <div class="col-auto">
-                    <form action="">
-                    <label class="sr-only">Name</label>
-                    <input type="search" class="form-control mb-2" placeholder="Search....">
-                </form>
+                    <form action="" method="GET">
+
+                        <input type="search" name="search" id="search" class="form-control mb-2" placeholder="Search....">
+                    </form>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-responsive-sm">
+                    <table class="table table-striped table-hover table-responsive-sm">
                         <thead>
                             <tr>
                                 <th style="color:black; text-align:center">No</th>
@@ -68,7 +68,7 @@ Pelanggaran/Tingkat3
                            @endforeach
                         </tbody>
                     </table>
-                    
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>
